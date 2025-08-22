@@ -1,0 +1,30 @@
+.navbar-container {
+  background-color: #388e3c; 
+  height: 50px;
+  position: fixed;
+  top: 60px; 
+  width: 100%;
+  z-index: 1020;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0 20px;
+}
+
+.system-title {
+  font-weight: bold;
+  color: white;
+  font-size: 1.1rem;
+}
+
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    height: auto;
+    padding: 5px 10px;
+  }
+
+  .system-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+}

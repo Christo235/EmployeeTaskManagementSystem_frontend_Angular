@@ -1,0 +1,17 @@
+.header-container {
+  background-color: #2e7d32; 
+  color: white;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  margin-top: 10px;
+  width: 200px;
+  height: 100px;
+}
+

@@ -1,0 +1,29 @@
+<div class="d-flex flex-column flex-md-row">
+ 
+  <div class="sidebar bg-success text-white p-3">
+    <h5 class="mb-4">Dashboard</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/dashboard']"
+          routerLinkActive="active-link">Dashboard Status</a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/profile']"
+          routerLinkActive="active-link">Profile</a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/employeeManagement']"
+          routerLinkActive="active-link">Employee Management</a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/taskManagement']"
+          routerLinkActive="active-link">Task Management</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="main-content flex-grow-1 p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

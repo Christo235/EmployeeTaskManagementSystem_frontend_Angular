@@ -1,0 +1,26 @@
+.employee-page {
+  background-color: #e8f5e9;
+  min-height: calc(100vh - 100px);
+}
+
+.card {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.btn-success {
+  background-color: #2e7d32;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #81c784;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #c8e6c9;
+}

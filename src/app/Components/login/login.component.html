@@ -1,0 +1,31 @@
+<div class="login-page d-flex justify-content-center align-items-center">
+  <div class="login-card p-4 shadow-sm rounded">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email">
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger small mt-1">
+          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
+          <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter your password">
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger small mt-1">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+          <!-- <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Minimum 6 characters</div> -->
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="!loginForm.valid">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <span>Don't have an account? <a [routerLink]="['/registerPage']">Register here</a></span>
+    </div>
+  </div>
+</div>

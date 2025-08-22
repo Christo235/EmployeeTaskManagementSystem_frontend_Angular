@@ -1,0 +1,35 @@
+<div class="profile-page d-flex justify-content-center align-items-center vh-100" *ngIf="user">
+  <div class="profile-card shadow p-4 rounded">
+    <h2 class="profile-title mb-4 text-success">My Profile</h2>
+
+    <div class="profile-item">
+      <span class="label">Employee ID:</span>
+      <span class="value">{{ user.employeeID }}</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="label">Name:</span>
+      <span class="value">{{ user.name }}</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="label">Email:</span>
+      <span class="value">{{ user.email }}</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="label">Department:</span>
+      <span class="value">{{ user.department }}</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="label">Joining Date:</span>
+      <span class="value">{{ user.joining_Date | date:'yyyy-MM-dd' }}</span>
+    </div>
+
+    <div class="profile-item">
+      <span class="label">Role:</span>
+      <span class="value">{{ user.role }}</span>
+    </div>
+  </div>
+</div>

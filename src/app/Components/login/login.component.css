@@ -1,0 +1,30 @@
+.login-page {
+  min-height: calc(100vh - 110px); 
+  background-color: #f4f9f4;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.login-card h2 {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.text-danger {
+  font-size: 0.85rem;
+}
+
+.btn-success {
+  background-color: #2e7d32;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #81c784;
+}
