@@ -1,8 +1,17 @@
-import { Component, OnInit,  Inject, PLATFORM_ID  } from '@angular/core';
-import { AuthService } from '../../Service/aurth-service.service';
-import { EmployeeService } from '../../Service/employees-service.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StateManagementAuthService } from '../../Service/state-management-auth.service';
+import { ProfileService } from '../../Service/profile.service';
+
+export interface Employee {
+  rp_EmployeeID: number;
+  rp_Name: string;
+  rp_Email: string;
+  rp_Department: string;
+  rp_Role: string;
+  rp_Joining_Date: string;
+}
 
 
 @Component({
@@ -14,20 +23,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ProfileComponentComponent implements OnInit {
 
-  user: any = '';
+  user: Employee | null = null;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-    private authService: AuthService,
-    private employeeService: EmployeeService
-  ) {}
+  constructor(
+    private profileService: ProfileService,
+    private authService: StateManagementAuthService
+  ) { }
 
   ngOnInit(): void {
-   
-    const userId = sessionStorage.getItem('employeeID');
-    if (userId) {
+    const empId = this.authService.employeeID();
 
-      const id = Number(userId);
-      this.employeeService.getEmployeeById(id).subscribe(res => this.user = res);
+    if (!empId) {
+      console.warn('No EmployeeID found in state.');
+      return;
     }
+
+    this.profileService.getProfile().subscribe({
+      next: (res) => {
+        this.user = {
+          rp_EmployeeID: res.rp_EmployeeID,
+          rp_Name: res.rp_Name,
+          rp_Email: res.rp_Email,
+          rp_Department: res.rp_Department,
+          rp_Role: res.rp_Role,
+          rp_Joining_Date: res.rp_Joining_Date
+        };
+      },
+      error: (err) => console.error('Error loading profile:', err)
+    });
+
+
   }
 }

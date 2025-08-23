@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Service/aurth-service.service';
-
+import { StateManagementAuthService } from '../../Service/state-management-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +13,19 @@ import { AuthService } from '../../Service/aurth-service.service';
 })
 export class LoginComponent implements OnInit {
 
-
   loginForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
-
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private stateAuth: StateManagementAuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required,]]
+      password: ['', [Validators.required]]
     });
   }
 
@@ -34,25 +36,25 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          sessionStorage.setItem('token', response.token ?? '');
-          sessionStorage.setItem('name', response.name ?? '');
-          sessionStorage.setItem('employeeID', response.employeeID?.toString() ?? '');
-          sessionStorage.setItem('message', response.message ?? '');
-          alert(response.message);
-           this.router.navigate(['/dashboard_Page/dashboard']);
 
+
+          this.stateAuth.setAuth(
+            response.rp_Token ?? '',
+            response.rp_Role ?? '',
+            response.rp_Name ?? '',
+            response.rp_EmployeeID.toString() ?? ''
+          );
+
+
+          this.router.navigate(['/dashboard_Page/dashboard']);
         },
         error: (error) => {
           console.error('Login failed', error);
-        },
-        complete: () => { }
-
+          alert(error.error?.rp_Message || "Login failed. Please try again.");
+        }
       });
-    }
-    else {
+    } else {
       console.error('Login form is invalid');
     }
-
   }
-
 }

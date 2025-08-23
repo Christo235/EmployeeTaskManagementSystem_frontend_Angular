@@ -1,30 +1,84 @@
 .navbar-container {
-  background-color: #388e3c; 
-  height: 50px;
+  background-color: #388e3c;
+  height: 60px;
   position: fixed;
-  top: 60px; 
+  top: 60px;
   width: 100%;
   z-index: 1020;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
 }
 
+
 .system-title {
-  font-weight: bold;
-  color: white;
-  font-size: 1.1rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-family: 'Roboto Slab', serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+.navbar-buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-text {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffeb3b;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-buttons button {
+  font-weight: 600;
+  color: #e00e0e;
+  border-color: #e00e0e;
+  transition: all 0.3s ease;
+}
+
+.navbar-buttons button:hover {
+  background-color: #e00e0e;
+  color: #ece4e4;
+  border-color: #e00e0e;
 }
 
 
 @media (max-width: 768px) {
   .navbar-container {
+    margin-top: -10px;
     flex-direction: column;
     height: auto;
-    padding: 5px 10px;
+    padding: 10px 15px;
+    position: relative;
   }
 
   .system-title {
-    font-size: 1rem;
-    margin-bottom: 5px;
+    position: static;
+    transform: none;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+  }
+
+  .navbar-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 0;
+  }
+
+  .navbar-buttons button {
+    width: 100%;
   }
 }

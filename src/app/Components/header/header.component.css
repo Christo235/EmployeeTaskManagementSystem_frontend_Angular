@@ -1,17 +1,50 @@
 .header-container {
-  background-color: #2e7d32; 
+  background-color: #2e7d32;
   color: white;
   height: 60px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1030;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  margin-top: 10px;
-  width: 200px;
-  height: 100px;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
 }
 
+
+@media (max-width: 1024px) {
+  .logo {
+    width: 150px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .header-container {
+
+    justify-content: center;
+    height: 50px;
+  }
+
+  .logo {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 100px;
+  }
+}

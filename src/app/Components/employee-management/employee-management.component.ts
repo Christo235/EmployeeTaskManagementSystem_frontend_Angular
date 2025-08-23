@@ -9,31 +9,37 @@ import { CommonModule, DatePipe } from '@angular/common';
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './employee-management.component.html',
   styleUrls: ['./employee-management.component.css'],
- 
+
 })
 export class EmployeeManagementComponent implements OnInit {
 
+ 
   employeeForm: FormGroup = new FormGroup({});
   employees: any[] = [];
-
+  roles: string[] = ['Admin', 'Manager', 'Developer', 'TeamLead'];
+  departments: string[] = ['HR', 'IT', 'Finance', 'Sales', 'Support'];
   editMode: boolean = false;
   editId: number | null = null;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private employeeService: EmployeeService,
-   
+
   ) { }
 
   ngOnInit(): void {
     this.loadEmployees();
 
     this.employeeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      department: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      department: ['', Validators.required],
       joining_Date: ['', Validators.required],
+      role: ['', Validators.required],
+      password: ['', Validators.required]
     });
+
+
   }
 
   loadEmployees() {
@@ -41,28 +47,36 @@ export class EmployeeManagementComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.employeeForm.invalid) return;
+    if (this.employeeForm.invalid || !this.editMode || this.editId == null) return;
 
-    const employeeData: any = this.employeeForm.value;
+    const formValue = this.employeeForm.value;
 
-    if (this.editMode && this.editId != null) {
-      this.employeeService.updateEmployee(this.editId, employeeData).subscribe(() => {
-        this.loadEmployees();
-        this.resetForm();
-      });
-    } else {
-      this.employeeService.createEmployee(employeeData).subscribe(() => {
-        this.loadEmployees();
-        this.resetForm();
-      });
-    }
+
+    const employeeData = {
+      ...formValue,
+      joining_Date: formValue.joining_Date.toString(),
+
+    };
+
+    this.employeeService.updateEmployee(this.editId, employeeData).subscribe(() => {
+      this.loadEmployees();
+      this.resetForm();
+    });
   }
+
+
 
   editEmployee(emp: any) {
     this.editMode = true;
     this.editId = emp.employeeID!;
-    this.employeeForm.patchValue(emp);
+    const joiningDate = emp.joining_Date ? new Date(emp.joining_Date).toISOString().split('T')[0] : '';
+    this.employeeForm.patchValue({
+      ...emp,
+      joining_Date: joiningDate
+    });
   }
+
+
 
   deleteEmployee(id: number) {
     if (confirm("Are you sure you want to delete this employee?")) {

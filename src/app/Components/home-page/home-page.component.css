@@ -1,29 +1,53 @@
 .home-page-container {
-  min-height: calc(100vh - 110px); 
-  padding-top: 20px;
-  background-color: #f4f9f4;
+  height: 90vh;
+  padding: 20px;
+  background-color: #f8f9fa;
+  text-align: center;
 }
 
 .home-page-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
   color: #2e7d32;
-  font-weight: bold;
 }
 
-.home-page-container p {
-  color: #2c3e50;
+.home-page-container p.lead {
+  font-size: 1.25rem;
+  color: #555;
 }
 
-.btn-success {
-  background-color: #2e7d32;
-  border: none;
+.home-page-container .btn {
+  min-width: 150px;
 }
 
-.btn-outline-success {
-  color: #2e7d32;
-  border-color: #2e7d32;
+
+@media (max-width: 768px) {
+  .home-page-container h1 {
+    font-size: 2rem;
+  }
+
+  .home-page-container p.lead {
+    font-size: 1rem;
+  }
+
+  .home-page-container .btn-lg {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .home-page-container .btn+.btn {
+    margin-left: 0;
+  }
 }
 
-.btn-outline-success:hover {
-  background-color: #81c784;
-  color: white;
+@media (max-width: 400px) {
+  .home-page-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .home-page-container p.lead {
+    font-size: 0.9rem;
+  }
 }

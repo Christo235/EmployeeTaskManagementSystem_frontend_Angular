@@ -25,6 +25,14 @@ export class DashboardComponent implements OnInit {
   pendingCount = 0;
   inProgressCount = 0;
   completedCount = 0;
+  onHold = 0;
+
+  summaryCards = [
+    { title: 'Pending', count: this.pendingCount, textClass: 'text-warning' },
+    { title: 'In Progress', count: this.inProgressCount, textClass: 'text-primary' },
+    { title: 'On Hold', count: this.onHold, textClass: 'text-secondary' },
+    { title: 'Completed', count: this.completedCount, textClass: 'text-success' }
+  ];
 
   constructor(private taskService: TaskServiceService, private employeeService: EmployeeService) { }
 
@@ -49,19 +57,30 @@ export class DashboardComponent implements OnInit {
 
   calculateSummary() {
     this.pendingCount = this.tasks.filter(t => t.taskStatus === 'Pending').length;
-    this.inProgressCount = this.tasks.filter(t => t.taskStatus === 'InProgress').length;
+    this.inProgressCount = this.tasks.filter(t => t.taskStatus === 'In Progress').length;
     this.completedCount = this.tasks.filter(t => t.taskStatus === 'Completed').length;
+    this.onHold = this.tasks.filter(t => t.taskStatus === 'On Hold').length;
+
+
+    this.summaryCards = [
+      { title: 'Pending', count: this.pendingCount, textClass: 'text-warning' },
+      { title: 'In Progress', count: this.inProgressCount, textClass: 'text-primary' },
+      { title: 'On Hold', count: this.onHold, textClass: 'text-secondary' },
+      { title: 'Completed', count: this.completedCount, textClass: 'text-success' }
+    ];
+  }
+
+
+  getEmployeeName(empId: number) {
+    const emp = this.employees.find(e => e.employeeID === empId);
+    return emp ? emp.name : '';
   }
 
   filterTasks() {
     this.filteredTasks = this.tasks.filter(task => {
       return (!this.selectedEmployee || task.assignedTo_EmployeeId == this.selectedEmployee)
-          && (!this.selectedStatus || task.taskStatus === this.selectedStatus);
+        && (!this.selectedStatus || task.taskStatus === this.selectedStatus);
     });
   }
 
-  getEmployeeName(empId: number) {
-    const emp = this.employees.find(e => e.EmployeeID === empId);
-    return emp ? emp.Name : '';
-  }
 }

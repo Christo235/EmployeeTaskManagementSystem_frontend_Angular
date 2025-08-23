@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Service/aurth-service.service';
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -12,19 +13,16 @@ import { AuthService } from '../../Service/aurth-service.service';
 })
 export class RegisterComponent implements OnInit {
 
-
-
   signUpForm: FormGroup = new FormGroup({});
-  
-  roles = [
-    { name: 'Admin', value: 1 },
-    { name: 'Manager', value: 2 },
-    { name: 'Team Lead', value: 3 },
-    { name: 'Developer', value: 4 }
-  ];
 
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  roles = ['Admin', 'Manager', 'Team Lead', 'Developer'];
+  departments: string[] = ['HR', 'IT', 'Finance', 'Sales', 'Support'];
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -36,7 +34,6 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       Role: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
-
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -47,7 +44,19 @@ export class RegisterComponent implements OnInit {
 
   onSignUp() {
     if (this.signUpForm.valid) {
-      const userData = this.signUpForm.value;
+      const formValue = this.signUpForm.value;
+
+
+      const userData = {
+        Name: formValue.Name,
+        Email: formValue.email,
+        Password: formValue.password,
+        Role: formValue.Role,
+        Department: formValue.Department,
+        Joining_Date: new Date(formValue.JoiningDate).toISOString().split('T')[0]
+      };
+
+      console.log("Sending userData to backend:", userData);
 
       this.authService.register(userData).subscribe({
         next: (response) => {
@@ -57,6 +66,7 @@ export class RegisterComponent implements OnInit {
         },
         error: (error) => {
           console.error('Registration failed', error);
+          alert(error.error?.rp_Message || "Registration failed. Please try again.");
         }
       });
     } else {

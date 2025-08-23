@@ -1,34 +1,52 @@
 .profile-card {
   width: 100%;
-  max-width: 450px;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 30px;
+  padding: 20px;
   text-align: left;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-title {
   text-align: center;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .profile-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
-  padding: 10px 15px;
+  margin-bottom: 12px;
+  padding: 10px;
   background-color: #f4f9f4;
   border-radius: 8px;
+  flex-wrap: wrap;
 }
 
 .label {
   font-weight: 600;
   color: #2e7d32;
+  margin-right: 8px;
 }
 
 .value {
   font-weight: 500;
   color: #555;
+  word-break: break-word;
+}
+
+
+@media (max-width: 576px) {
+  .profile-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .label {
+    margin-bottom: 4px;
+  }
+
+  .profile-title {
+    font-size: 1.4rem;
+  }
 }

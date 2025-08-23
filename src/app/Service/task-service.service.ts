@@ -24,12 +24,13 @@ export class TaskServiceService {
     return this.http.post(this.apiUrl_task, task);
   }
 
-  updateTask(task: any, id :any): Observable<any> {
-    console.log('Updating task with ID:', 'and data:', task);
-    return this.http.put(this.apiUrl_task + '/' + id, task);
+  updateTask(taskID: any, task: any): Observable<any> {
+
+    return this.http.put(this.apiUrl_task + '/' + taskID, task);
   }
 
   deleteTask(id: number): Observable<any> {
     return this.http.delete(this.apiUrl_task + '/' + id);
   }
 }
+

@@ -1,27 +1,32 @@
-<div class="d-flex flex-column flex-md-row">
- 
-  <div class="sidebar bg-success text-white p-3">
-    <h5 class="mb-4">Dashboard</h5>
+<div class="d-flex content-wrapper">
+
+
+  <div class="sidebar bg-success text-white p-3" [ngClass]="{'collapsed': isCollapsed && isMobile}">
+    <div class="d-flex justify-content-between align-items-center mb-3 d-md-none">
+      <h5 class="mb-0">Menu</h5>
+      <button class="btn btn-light btn-sm" (click)="toggleSidebar()">☰</button>
+    </div>
+
     <ul class="nav flex-column">
       <li class="nav-item mb-2">
-        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/dashboard']"
-          routerLinkActive="active-link">Dashboard Status</a>
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/dashboard']" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">Dashboard Status</a>
       </li>
       <li class="nav-item mb-2">
-        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/profile']"
-          routerLinkActive="active-link">Profile</a>
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/profile']" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">Profile</a>
       </li>
       <li class="nav-item mb-2">
         <a class="nav-link text-white" [routerLink]="['/dashboard_Page/employeeManagement']"
-          routerLinkActive="active-link">Employee Management</a>
+          routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Employee Management</a>
       </li>
       <li class="nav-item mb-2">
-        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/taskManagement']"
-          routerLinkActive="active-link">Task Management</a>
+        <a class="nav-link text-white" [routerLink]="['/dashboard_Page/taskManagement']" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">Task Management</a>
       </li>
-
     </ul>
   </div>
+
 
   <div class="main-content flex-grow-1 p-4">
     <router-outlet></router-outlet>

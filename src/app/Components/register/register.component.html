@@ -1,52 +1,69 @@
 <div class="signup-page d-flex justify-content-center align-items-center">
-    <div class="signup-card p-4 shadow-sm rounded">
-        <h2 class="text-center mb-4">Sign Up</h2>
+  <div class="signup-card p-4 shadow rounded">
+    <h2 class="text-center mb-4">Sign Up</h2>
 
-        <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
-            <div class="mb-3">
-                <label for="nameInput">Name</label>
-                <input id="nameInput" type="text" formControlName="Name" class="form-control" placeholder="Enter your name">
-            </div>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
 
-            <div class="mb-3">
-                <label for="emailInput">Email</label>
-                <input id="emailInput" type="email" formControlName="email" class="form-control" placeholder="Enter your email">
-            </div>
 
-            <div class="mb-3">
-                <label for="joiningDateInput">Joining Date</label>
-                <input id="joiningDateInput" type="date" formControlName="JoiningDate" class="form-control" title="Select your joining date">
-            </div>
-            <div class="mb-3">
-                <label for="roleSelect">Role</label>
-                <select id="roleSelect" class="form-select" formControlName="Role" title="Select your role">
-                    <option value="" disabled selected>Select role</option>
-                    <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
-                </select>
-            </div>
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label for="nameInput" class="form-label">Full Name</label>
+          <input id="nameInput" type="text" formControlName="Name" class="form-control" placeholder="John Doe">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="emailInput" class="form-label">Email</label>
+          <input id="emailInput" type="email" formControlName="email" class="form-control"
+            placeholder="email@example.com">
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="departmentInput">Department</label>
-                <input id="departmentInput" type="text" formControlName="Department" class="form-control" placeholder="Enter your department">
-            </div>
 
-            <div class="mb-3">
-                <label for="passwordInput">Password</label>
-                <input id="passwordInput" type="password" formControlName="password" class="form-control" placeholder="Enter your password">
-            </div>
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label for="joiningDateInput" class="form-label">Joining Date</label>
+          <input id="joiningDateInput" type="date" formControlName="JoiningDate" class="form-control">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="roleSelect" class="form-label">Role</label>
+          <select id="roleSelect" class="form-select" formControlName="Role">
+            <option value="" disabled selected>Select Role</option>
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+          </select>
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="confirmPasswordInput">Confirm Password</label>
-                <input id="confirmPasswordInput" type="password" formControlName="confirmPassword" class="form-control" placeholder="Re-enter your password">
-                <div *ngIf="signUpForm.errors?.['passwordMismatch']" class="text-danger mt-1">
-                    Passwords do not match
-                </div>
-            </div>
 
-            <button type="submit" class="btn btn-success w-100" [disabled]="!signUpForm.valid">Sign Up</button>
-           
-        </form> <div class="text-center mt-3">
-      <span>Don't have an account? <a [routerLink]="['/loginPage']">Login here</a></span>
+      <div class="mb-3">
+        <label for="departmentInput" class="form-label">Department</label>
+        <select id="departmentInput" class="form-select" formControlName="Department">
+          <option value="" disabled selected>Select Department</option>
+          <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+        </select>
+      </div>
+
+
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label for="passwordInput" class="form-label">Password</label>
+          <input id="passwordInput" type="password" formControlName="password" class="form-control"
+            placeholder="Enter password">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+          <input id="confirmPasswordInput" type="password" formControlName="confirmPassword" class="form-control"
+            placeholder="Confirm password">
+          <div *ngIf="signUpForm.errors?.['passwordMismatch']" class="text-danger mt-1">
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="!signUpForm.valid">Sign Up</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <span>Already have an account? <a [routerLink]="['/loginPage']">Login here</a></span>
     </div>
-    </div>
+  </div>
 </div>
