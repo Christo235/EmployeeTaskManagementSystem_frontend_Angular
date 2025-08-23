@@ -13,6 +13,7 @@ import { AuthService } from '../../Service/aurth-service.service';
 })
 export class RegisterComponent implements OnInit {
 
+  abs :any
   signUpForm: FormGroup = new FormGroup({});
 
 
